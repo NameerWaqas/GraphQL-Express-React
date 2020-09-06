@@ -1,0 +1,9 @@
+.UserControls{
+    width:25vw;
+    background-color: lightgray;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    top: 0;
+}
