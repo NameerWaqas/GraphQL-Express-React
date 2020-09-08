@@ -3,17 +3,13 @@ import { context } from './ContextAPI'
 import { Checkbox } from "antd"
 
 export default function UserControls(props) {
-    const [query, setQuery, gqlSlider, setSlider] = useContext(context)
-    let handleClick = () => {
-        setSlider(prevVal => !prevVal)
-    }
-    console.log(gqlSlider)
+    const [query, setQuery] = useContext(context)
+
     return (
         <div>
             <h1>User Controls</h1>
             <CheckBoxGroup />
             <QueryDispaly />
-            <button id="SlideInBtn" onClick={handleClick}>Don't know GraphQL?</button>
         </div>
     )
 }
