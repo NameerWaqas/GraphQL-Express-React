@@ -15,10 +15,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <ContextProvider >
-        <div style={{width:"75vw"}}><APIData /></div>
-        <div className="UserControls">
-          <UserControls/>
-        </div>
+        <div style={{width:"75vw"}}> <APIData /> </div>
+        <div className="UserControls"> <UserControls/> </div>
         <IntroGQL/>
       </ContextProvider>
     </ApolloProvider>
