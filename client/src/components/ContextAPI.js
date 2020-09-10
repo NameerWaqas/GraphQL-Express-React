@@ -13,10 +13,13 @@ export  function ContextProvider(props) {
         company: true,
         address: true
     }))
+
     const [gqlSilder,setSlider] = useState(false)
 
+    const [querySnap,setSnap] = useState("")
+
     return (
-        <context.Provider value={[query,setQuery,gqlSilder,setSlider]}>
+        <context.Provider value={[query,setQuery,gqlSilder,setSlider,querySnap,setSnap]}>
             {props.children}
         </context.Provider>
     )

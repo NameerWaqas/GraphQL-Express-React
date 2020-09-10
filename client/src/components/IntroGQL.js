@@ -11,8 +11,8 @@ export default function IntroGQL(props) {
     return (
         <div id={gqlSlider ? 'SlideIn' : 'SlideOut'}>
             <h1>Intro to GQL</h1>
-            <Button style={{ position: "fixed", bottom: "0vw", right: "0vh" }} onClick={handleClick}
-                type="primary" shape='round'>Don't know GraphQL</Button>
+            <Button style={{ position: "fixed", bottom: "0vw", right: "1vh" }} onClick={handleClick}
+                type="primary" shape='circle'>{"->"}</Button>
 
         </div>
     )
