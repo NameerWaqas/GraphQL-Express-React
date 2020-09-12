@@ -16,7 +16,7 @@ function App() {
     <ApolloProvider client={client}>
       <ContextProvider >
         <div style={{width:"75vw"}}> <APIData /> </div>
-        <div className="UserControls"> <UserControls/> </div>
+        <div id="UserControls"> <UserControls/> </div>
         <IntroGQL/>
       </ContextProvider>
     </ApolloProvider>
