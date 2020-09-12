@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { Descriptions } from 'antd';
+import { Descriptions, Input } from 'antd';
 import { context } from './ContextAPI';
 
 
@@ -47,6 +47,33 @@ function GenerateQuery() {
   return queryResponse;
 }
 
+
+function DescriptionsForm(props) {
+  return (
+    <Descriptions bordered column={{ lg: 2, md: 2, sm: 2, xs: 1 }} style={{ margin: "1%" }}>
+      <Descriptions.Item label="ID"><Input placeholder="ID" /></Descriptions.Item>
+      <Descriptions.Item label="Name"><Input placeholder="Name" /></Descriptions.Item>
+      <Descriptions.Item label="Username"><Input placeholder="Username" /></Descriptions.Item>
+      <Descriptions.Item label="Email"><Input placeholder="Email" /></Descriptions.Item>
+      <Descriptions.Item label="Phone"><Input placeholder="Phone" /></Descriptions.Item>
+      <Descriptions.Item label="Website"><Input placeholder="Website" /></Descriptions.Item>
+      <Descriptions.Item label="Company">
+        <Input placeholder="Company name" />
+        <Input placeholder="Catch phrase" />
+        <Input placeholder="BS" />
+      </Descriptions.Item>
+      <Descriptions.Item label="address">
+        <Input placeholder="Street" />
+        <Input placeholder="Suite" />
+        <Input placeholder="City" />
+        <Input placeholder="Zip code" />
+
+      </Descriptions.Item>
+    </Descriptions>
+  )
+}
+
+
 export default function APIData(props) {
   const { loading, data } = useQuery(GenerateQuery())
 
@@ -56,6 +83,7 @@ export default function APIData(props) {
   else {
     return (
       <div>
+        <DescriptionsForm/>
         {
           data.users.map(user => {
             return <Descriptions key={user.id} bordered column={{ lg: 3, md: 3, sm: 2, xs: 1 }} style={{ margin: "1%" }}>
