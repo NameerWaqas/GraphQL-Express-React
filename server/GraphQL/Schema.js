@@ -6,13 +6,13 @@ const {
     GraphQLFloat,
     GraphQLList
 } = require('graphql')
+
 const axios = require('axios')
 
 
 let fetchUserData = () => {
     axios.get('https://jsonplaceholder.typicode.com/users').then(res => {
         usersData = res.data
-        console.log(usersData)
     }
     )
 }
@@ -25,8 +25,8 @@ let usersData = fetchUserData()
 const customUserLocation = new GraphQLObjectType({
     name: "customGeoType",
     fields: {
-        lat: {type:GraphQLString},
-        lng: {type:GraphQLString}
+        lat: { type: GraphQLString },
+        lng: { type: GraphQLString }
     }
 })
 
@@ -38,12 +38,12 @@ const customUserAddress = new GraphQLObjectType({
         suite: { type: GraphQLString },
         city: { type: GraphQLString },
         zipcode: { type: GraphQLString },
-        geo: {type:customUserLocation}
+        geo: { type: customUserLocation }
     }
 })
 
 //Custom Company
-const customCompanyType =  new GraphQLObjectType({
+const customCompanyType = new GraphQLObjectType({
     name: "customCompanyType",
     fields: {
         name: { type: GraphQLString },
@@ -60,10 +60,10 @@ const customUserType = new GraphQLObjectType({
         name: { type: GraphQLString },
         username: { type: GraphQLString },
         email: { type: GraphQLString },
-        address: {type:customUserAddress},
+        address: { type: customUserAddress },
         phone: { type: GraphQLString },
         website: { type: GraphQLString },
-        company:{type:customCompanyType}
+        company: { type: customCompanyType }
     }
 })
 
@@ -71,25 +71,76 @@ const rootQuery = new GraphQLObjectType({
     name: 'rootQuery',
     fields: {
         users: {
-            type:GraphQLList(customUserType),
+            type: GraphQLList(customUserType),
             resolve: (parentData, args) => {
                 return usersData
             }
         },
-        user:{
-            type:customUserType,
-            args:{
-                id:{type:GraphQLInt}
+        user: {
+            type: customUserType,
+            args: {
+                id: { type: GraphQLInt }
             },
-            resolve:(parentData,args)=>{
-                return usersData[args.id-1]
+            resolve: (parentData, args) => {
+                return usersData[args.id - 1]
             }
         }
     }
 })
 
-
+let mutation = new GraphQLObjectType({
+    name: "mutations",
+    fields: {
+        addUser: {
+            type:GraphQLList(customUserType),
+            args: {
+                id: { type: GraphQLInt },
+                name: { type: GraphQLString },
+                username: { type: GraphQLString },
+                email: { type: GraphQLString },
+                street: { type: GraphQLString },
+                suite: { type: GraphQLString },
+                city: { type: GraphQLString },
+                zipcode: { type: GraphQLString },
+                lat: { type: GraphQLString },
+                lng: { type: GraphQLString },
+                phone: { type: GraphQLString },
+                website: { type: GraphQLString },
+                cname: { type: GraphQLString },
+                catchPhrase: { type: GraphQLString },
+                bs: { type: GraphQLString }
+            },
+            resolve: (parentData, args) => {
+                usersData.push({
+                    id: args.id,
+                    name: args.name,
+                    username: args.username,
+                    email: args.email,
+                    address:{
+                        street:args.street,
+                        suite:args.suite,
+                        city:args.city,
+                        zipcode:args.zipcode,
+                        geo:{
+                            lat:args.lat,
+                            lng:args.lng
+                        }
+                    },
+                    phone: args.phone,
+                    website: args.website,
+                    company:{
+                        name:args.cname,
+                        catchPhrase:args.catchPhrase,
+                        bs:args.bs
+                    }
+                })
+                return usersData
+            }
+        }
+    }
+})
 
 module.exports = new GraphQLSchema({
-    query: rootQuery
+    query: rootQuery,
+    mutation: mutation
 })
