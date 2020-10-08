@@ -43,63 +43,23 @@ function GenerateQuery() {
         }
       }
 `
-
   return queryResponse;
 }
 
 
 function DescriptionsForm(props) {
   let [change, setChange] = useState({
-    "id": "",
-    "name": "",
-    "username": "",
-    "email": "",
-    "phone": "",
-    "website": "",
-    "city": "",
-    "suite": "",
-    "street": "",
-    "zipcode": "",
-    "cname": "",
-    "catchPhrase": "",
-    "bs": ""
+    "id": "", "name": "", "username": "", "email": "",
+    "phone": "", "website": "", "city": "", "suite": "",
+    "street": "", "zipcode": "", "cname": "", "catchPhrase": "", "bs": ""
   })
   let handleChange = (e) => {
-    let eName = e.target.name
-    let eVal = e.target.value
+    const eVal = e.target.value
+    const eName = e.target.name
     setChange((prevState) => {
-      switch (eName) {
-        case 'id':
-          return { ...prevState, id: eVal };
-        case 'name':
-          return { ...prevState, name: eVal };
-        case 'username':
-          return { ...prevState, username: eVal };
-        case 'email':
-          return { ...prevState, email: eVal };
-        case 'phone':
-          return { ...prevState, phone: eVal }
-        case 'website':
-          return { ...prevState, website: eVal }
-        case 'city':
-          return { ...prevState, city: eVal }
-        case 'suite':
-          return { ...prevState, suite: eVal }
-        case 'zipcode':
-          return { ...prevState, zipcode: eVal }
-        case 'street':
-          return { ...prevState, street: eVal }
-        case 'cname':
-          return { ...prevState, cname: eVal }
-        case 'catchPhrase':
-          return { ...prevState, catchPhrase: eVal }
-        case 'bs':
-          return { ...prevState, bs: eVal }
-        default:
-          return { ...prevState }
-      }
+      console.log(prevState)
+      return { ...prevState, [eName]: eVal }
     })
-    // console.log(e.target.value, e.target.name)
   }
 
   let handleAddUser = () => {
